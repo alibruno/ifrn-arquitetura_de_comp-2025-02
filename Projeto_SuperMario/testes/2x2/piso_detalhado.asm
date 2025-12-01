@@ -40,8 +40,8 @@ piso:	beq $15,$0,fim
     sw   $11, 0($8)    # preto
     addi $8,  $8, 4
     
-    # Fim da linha 1. Ajuste para a próxima linha:
-    # 1024 (pulo total) - 48 (já percorridos na linha) = 976
+    # Fim da linha 1. Ajuste para a prï¿½xima linha:
+    # 1024 (pulo total) - 48 (jï¿½ percorridos na linha) = 976
     addi $8,  $8, 976 
 
     # --- SEGUNDA LINHA ---
@@ -189,7 +189,7 @@ piso:	beq $15,$0,fim
     # Fim da linha 6.
     addi $8,  $8, 976
 
-    # --- SÉTIMA LINHA ---
+    # --- Sï¿½TIMA LINHA ---
     sw   $11, 0($8)    # preto
     addi $8,  $8, 4
     sw   $11, 0($8)    # preto
@@ -276,7 +276,7 @@ piso:	beq $15,$0,fim
     # Fim da linha 9.
     addi $8,  $8, 976
 
-    # --- DÉCIMA LINHA ---
+    # --- Dï¿½CIMA LINHA ---
     sw   $10, 0($8)    # rosa
     addi $8,  $8, 4
     sw   $9,  0($8)    # marrom
@@ -305,7 +305,7 @@ piso:	beq $15,$0,fim
     # Fim da linha 10.
     addi $8,  $8, 976
 
-    # --- DÉCIMA PRIMEIRA LINHA ---
+    # --- Dï¿½CIMA PRIMEIRA LINHA ---
     sw   $9,  0($8)    # marrom
     addi $8,  $8, 4
     sw   $11, 0($8)    # preto
