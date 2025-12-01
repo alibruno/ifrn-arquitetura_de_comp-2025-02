@@ -9,10 +9,10 @@ main: 	lui $8, 0x1001
 	ori $10,0xfcbcb0 #rosa
 	ori $11,0x000000 #preto
 	
-	addi $15,$0,41
+	addi $15,$0,45
 	
 piso:	beq $15,$0,fim
-	beq $15, 21, ajeitarPonteiro 
+	beq $15, 23, ajeitarPonteiro 
 
     # --- PRIMEIRA LINHA ---
     sw   $9,  0($8)    # marrom
@@ -331,7 +331,7 @@ piso:	beq $15,$0,fim
     sw   $9,  0($8)    # marrom
     addi $8,  $8, 4
     
-	subi $8,$8,10236
+	subi $8,$8,10240
 	addi $15,$15,-1
 	
 	j piso
