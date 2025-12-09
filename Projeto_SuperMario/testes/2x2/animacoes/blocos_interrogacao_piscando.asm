@@ -2957,6 +2957,9 @@ fimTudo:
 	addi $11,$0,0
 	addi $12,$0,0
 	addi $13,$0,0
+	addi $15,$0,0
+	addi $16,$0,0
+	addi $17,$0,0
 	addi $24,$0,0
 	addi $25,$0,0
 	
