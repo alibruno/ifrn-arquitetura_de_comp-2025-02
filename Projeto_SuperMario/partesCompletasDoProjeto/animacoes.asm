@@ -3008,4 +3008,3 @@ fimTudo:
 	addi $25,$0,0
 
 	j infinito
-	
