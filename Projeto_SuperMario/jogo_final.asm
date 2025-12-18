@@ -19,7 +19,7 @@ fimceu:
 
 
 				# ARBUSTO
-				# DIMENSÃ•ES 40 X 7 PIXELS
+				# DIMENSÕES 40 X 7 PIXELS
 				# COMPRIMENTO : 40 PIXELS (CW - EJ)
 				# ALTURA: 7 PIXELS (106 - 112)
 
@@ -489,8 +489,8 @@ piso:	beq $15,$0,fimpiso
     sw   $11, 0($8)    # preto
     addi $8,  $8, 4
     
-    # Fim da linha 1. Ajuste para a prï¿½xima linha:
-    # 1024 (pulo total) - 48 (jï¿½ percorridos na linha) = 976
+    # Fim da linha 1. Ajuste para a pr?xima linha:
+    # 1024 (pulo total) - 48 (j? percorridos na linha) = 976
     addi $8,  $8, 976 
 
     # --- SEGUNDA LINHA ---
@@ -638,7 +638,7 @@ piso:	beq $15,$0,fimpiso
     # Fim da linha 6.
     addi $8,  $8, 976
 
-    # --- Sï¿½TIMA LINHA ---
+    # --- S?TIMA LINHA ---
     sw   $11, 0($8)    # preto
     addi $8,  $8, 4
     sw   $11, 0($8)    # preto
@@ -725,7 +725,7 @@ piso:	beq $15,$0,fimpiso
     # Fim da linha 9.
     addi $8,  $8, 976
 
-    # --- Dï¿½CIMA LINHA ---
+    # --- D?CIMA LINHA ---
     sw   $10, 0($8)    # rosa
     addi $8,  $8, 4
     sw   $9,  0($8)    # marrom
@@ -754,7 +754,7 @@ piso:	beq $15,$0,fimpiso
     # Fim da linha 10.
     addi $8,  $8, 976
 
-    # --- Dï¿½CIMA PRIMEIRA LINHA ---
+    # --- D?CIMA PRIMEIRA LINHA ---
     sw   $9,  0($8)    # marrom
     addi $8,  $8, 4
     sw   $11, 0($8)    # preto
@@ -810,7 +810,7 @@ iMontanhaMaior:
 	ori $12, 0x00A800
 	
 # --- Primeira Linha ---
-# Endereço inicial: ...86028
+# Endere?o inicial: ...86028
 # Desenha 5 pretos
     sw   $11, 0($8)     # pixel 1
     addi $8,  $8, 4
@@ -823,12 +823,12 @@ iMontanhaMaior:
     sw   $11, 0($8)     # pixel 5
     addi $8,  $8, 4
 
-    # Correção de salto para a próxima linha (87040)
-    # Já andamos 20 bytes. Faltam 992 para chegar em 87040.
+    # Corre??o de salto para a pr?xima linha (87040)
+    # J? andamos 20 bytes. Faltam 992 para chegar em 87040.
     addi $8, $8, 992 
 
 # --- Segunda Linha ---
-# Endereço inicial: ...87040
+# Endere?o inicial: ...87040
     sw   $11, 0($8)     # preto
     addi $8,  $8, 4
     sw   $11, 0($8)     # preto
@@ -852,12 +852,12 @@ iMontanhaMaior:
     sw   $11, 0($8)     # preto
     addi $8,  $8, 4
 
-    # Salto para a próxima linha (88064)
+    # Salto para a pr?xima linha (88064)
     # Andamos 44 bytes. Faltam 980.
     addi $8, $8, 980
 
 # --- Terceira Linha ---
-# Endereço inicial: ...88064
+# Endere?o inicial: ...88064
     sw   $12, 0($8)     # verde
     addi $8,  $8, 4
     sw   $12, 0($8)
@@ -885,12 +885,12 @@ iMontanhaMaior:
     sw   $11, 0($8)     # preto
     addi $8,  $8, 4
 
-    # Salto para a próxima linha (89088)
+    # Salto para a pr?xima linha (89088)
     # Andamos 52 bytes. Faltam 972.
     addi $8, $8, 972
 
 # --- Quarta Linha ---
-# Endereço inicial: ...89088
+# Endere?o inicial: ...89088
     sw   $12, 0($8)     # verde
     addi $8,  $8, 4
     sw   $12, 0($8)
@@ -920,14 +920,14 @@ iMontanhaMaior:
     sw   $11, 0($8)     # preto
     addi $8,  $8, 4
 
-    # Salto para a próxima linha (90112)
+    # Salto para a pr?xima linha (90112)
     # Andamos 56 bytes. Faltam 968.
     addi $8, $8, 968
 
-# --- LOOP PARA GERAR AS PRÓXIMAS LINHAS (ESCADA) ---
-    # $8 já está apontando para o início da linha 5 (90112)
+# --- LOOP PARA GERAR AS PR?XIMAS LINHAS (ESCADA) ---
+    # $8 j? est? apontando para o in?cio da linha 5 (90112)
     
-    addi $13, $0, 14          # $13 = Quantidade de verdes (começa com 14)
+    addi $13, $0, 14          # $13 = Quantidade de verdes (come?a com 14)
     addi $14, $0, 18          # $14 = Total de linhas a desenhar
 
 loop_linhas:
@@ -935,11 +935,11 @@ loop_linhas:
     
     # Desenha os Verdes
     add $15, $0, $13         # Contador de verdes para esta linha
-    add $16, $0, $8         # $16 é o ponteiro que vai andar na linha
+    add $16, $0, $8         # $16 ? o ponteiro que vai andar na linha
 loop_verde:
     beq  $15, $0, fim_verde
     sw   $12, 0($16)      # Desenha verde
-    addi $16, $16, 4      # Próximo pixel
+    addi $16, $16, 4      # Pr?ximo pixel
     addi $15, $15, -1     # Decrementa contador
     j    loop_verde
 
@@ -947,9 +947,9 @@ fim_verde:
     # Desenha o Preto no final
     sw   $11, 0($16)      # Desenha preto
 
-    # Prepara para a próxima linha
-    addi $8, $8, 1024   # Pula para a próxima linha (base + 1024)
-    addi $13, $13, 1      # Aumenta um verde para a próxima linha
+    # Prepara para a pr?xima linha
+    addi $8, $8, 1024   # Pula para a pr?xima linha (base + 1024)
+    addi $13, $13, 1      # Aumenta um verde para a pr?xima linha
     addi $14, $14, -1     # Uma linha a menos para fazer
     j    loop_linhas
 
@@ -1014,7 +1014,7 @@ imontanhaMenor:
 	ori $12, 0x00A800
 	
 # --- Primeira Linha ---
-# Endereço inicial: ...93828
+# Endere?o inicial: ...93828
 # Desenha 5 pretos
     sw   $11, 0($8)     # pixel 1
     addi $8,  $8, 4
@@ -1027,12 +1027,12 @@ imontanhaMenor:
     sw   $11, 0($8)     # pixel 5
     addi $8,  $8, 4
 
-    # Correção de salto para a próxima linha (94840)
-    # Já andamos 20 bytes. Faltam 992 para chegar em 94840.
+    # Corre??o de salto para a pr?xima linha (94840)
+    # J? andamos 20 bytes. Faltam 992 para chegar em 94840.
     addi $8, $8, 992 
 
 # --- Segunda Linha ---
-# Endereço inicial: ...94840
+# Endere?o inicial: ...94840
     sw   $11, 0($8)     # preto
     addi $8,  $8, 4
     sw   $11, 0($8)     # preto
@@ -1056,12 +1056,12 @@ imontanhaMenor:
     sw   $11, 0($8)     # preto
     addi $8,  $8, 4
 
-    # Salto para a próxima linha (95856)
+    # Salto para a pr?xima linha (95856)
     # Andamos 44 bytes. Faltam 972.
     addi $8, $8, 972
 
 # --- Terceira Linha ---
-# Endereço inicial: ...95856
+# Endere?o inicial: ...95856
     sw   $11, 0($8)     # preto
     addi $8,  $8, 4
     sw   $11, 0($8)     # preto
@@ -1093,12 +1093,12 @@ imontanhaMenor:
     sw   $11, 0($8)     # preto
     addi $8,  $8, 4
 
-    # Salto para a próxima linha (89088)
+    # Salto para a pr?xima linha (89088)
     # Andamos 52 bytes. Faltam 972.
     addi $8, $8, 972
 
 # --- Quarta Linha ---
-# Endereço inicial: ...89088
+# Endere?o inicial: ...89088
     sw   $12, 0($8)     # verde
     addi $8,  $8, 4
     sw   $12, 0($8)
@@ -1128,13 +1128,13 @@ imontanhaMenor:
     sw   $11, 0($8)     # preto
     addi $8,  $8, 4
 
-# --- LOOP PARA GERAR AS PRÓXIMAS LINHAS (ESCADA) ---
-    # --- Configuração do Endereço Inicial ($8) ---
+# --- LOOP PARA GERAR AS PR?XIMAS LINHAS (ESCADA) ---
+    # --- Configura??o do Endere?o Inicial ($8) ---
     lui  $8, 0x1001
-    addi $1, $0, 96876              # Endereço base
-    add  $8, $8, $1        	    # Endereço inicial atualizadp
+    addi $1, $0, 96876              # Endere?o base
+    add  $8, $8, $1        	    # Endere?o inicial atualizadp
 
-    # --- Variáveis de Controle ---
+    # --- Vari?veis de Controle ---
     addi   $16, $0, 15             # Quantidade de verdes iniciais
     addi   $17, $0, 952            # $17 = Salto inicial ajustado para expandir p/ esquerda
     addi   $18, $0, 12             # Total de linhas a desenhar
@@ -1161,11 +1161,11 @@ fim_verde2:
     sw   $11, 0($8)
     addi $8, $8, 4
 
-    # 4. Pula para a próxima linha
-    # O valor 952 fará com que caia 4 bytes antes do alinhamento vertical
+    # 4. Pula para a pr?xima linha
+    # O valor 952 far? com que caia 4 bytes antes do alinhamento vertical
     add  $8, $8, $17       
 
-    # 5. Atualiza para a próxima volta
+    # 5. Atualiza para a pr?xima volta
     addi $16, $16, 2         # Aumenta largura em 2 pixels (1 esq + 1 dir)
     addi $17, $17, -8        # Diminui o salto para compensar a largura maior
     addi $18, $18, -1        # Decrementa contador de linhas
@@ -1381,7 +1381,7 @@ iCano:	lui $8,0x1001
 	sw $10,0($8)
 	addi $8,$8,4
 	
-	# PESCOÃ‡O
+	# PESCOÇO
 	# LINHA 8 = 99
 	addi $8,$8,-1072
 	
@@ -1411,7 +1411,7 @@ iCano:	lui $8,0x1001
 	addi $8,$8,4
 	
 	
-	# "CABEÃ‡A"
+	# "CABEÇA"
 	# LINHA 9 = 98
 	addi $8,$8,-1072
 	
@@ -1558,111 +1558,366 @@ fimCano:
 	 addi $11,$0,0
 	 addi $1,$0,0
 
-# ------------------- BLOCOS DE INTERROGACAO APAGADOS -------------------
+# ------------------- BLOCOS DE INTERROGACAO -------------------
 
-# Serao salvos os blocos quando o mario bate neles (apagados)
-iInterrogacaoApagado: 	
+iInterrogacao: 	
  	lui $8, 0x1001
- 	ori $1, $0, 58944
- 	add $24, $8, $1
- 	ori $1, $0, 59088
- 	add $25, $8, $1
- 	addi $1, $0, 0
-
- 	ori $9, 0x561d00
- 	ori $10, 0x000000
- 	#PRIMEIRA COLUNA
- 	addi $24, $24, 1024
- 	addi $25, $25, 1024
- 	addi $20, $0, 9
- forColuna1Int:
- 	beq $20, $0, fimforColuna1Int
- 	sw $10, 0($24)
- 	sw $10, 0($25)
- 	addi $24, $24, 1024
- 	addi $25, $25, 1024
- 	addi $20, $20, -1
- 	j forColuna1Int
- 	
-fimforColuna1Int:
-	lui $8, 0x1001
- 	ori $1, $0, 58944
- 	add $24, $8, $1
- 	ori $1, $0, 59088
- 	add $25, $8, $1
- 	addi $1, $0, 0
- 	
- 	addi $24, $24, 4
- 	addi $25, $25, 4
- 	
+	ori $1, 58944
+	add $24, $8, $1
+	ori $1, 59088
+	add $25, $8, $1
+	
+	ori $9, 0x5c94fc  #azul
+	ori $10, 0xc84c0c #marrom	
+	ori $11, 0xfcbcb0 #rosa
+	ori $12, 0xfc9838 #laranja
+	ori $13, 0x000000 #preto
+	
+	# PRIMEIRA LINHA
+	sw $9, 0($24)
+	sw $9, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	
 	addi $20, $0, 10
 	
-forColunas2a10Int:
-	beq $20, $0, fimforColunas2a10Int
- 	sw $10, 0($24)
- 	sw $9, 1024($24)
- 	sw $9, 2048($24)
- 	sw $9, 3072($24)
- 	sw $9, 4096($24)
- 	sw $9, 5120($24)
- 	sw $9, 6144($24)
- 	sw $9, 7168($24)
- 	sw $9, 8192($24)
- 	sw $9, 9216($24)
- 	sw $10, 10240($24)
- 	addi $24, $24, 4
- 	sw $10, 0($25)
- 	sw $9, 1024($25)
- 	sw $9, 2048($25)
- 	sw $9, 3072($25)
- 	sw $9, 4096($25)
- 	sw $9, 5120($25)
- 	sw $9, 6144($25)
- 	sw $9, 7168($25)
- 	sw $9, 8192($25)
- 	sw $9, 9216($25)
- 	sw $10, 10240($25)
- 	addi $25, $25, 4
- 	addi $20, $20, -1
- 	j forColunas2a10Int
- 	
- fimforColunas2a10Int:
- 	addi $24, $24, 1024
-  	addi $25, $25, 1024
- 	addi $20, $0, 9
- forColuna12Int:
- 	beq $20, $0, fimforColuna12Int
- 	sw $10, 0($24)
- 	addi $24, $24, 1024
- 	sw $10, 0($25)
- 	addi $25, $25, 1024
- 	addi $20, $20, -1
- 	j forColuna12Int
- 	
-fimforColuna12Int:
-	lui $8, 0x1001
- 	ori $1, $0, 58944
- 	add $24, $8, $1
- 	ori $1, $0, 59088
- 	add $25, $8, $1
- 	addi $1, $0, 0
- 	
- 	sw $10, 2056($24)
- 	sw $10, 7176($24)
- 	sw $10, 2080($24)
- 	sw $10, 7200($24)
- 	sw $10, 2056($25)
- 	sw $10, 7176($25)
- 	sw $10, 2080($25)
- 	sw $10, 7200($25)
- 	
-	addi $1, $0, 0
-	addi $8, $0, 0
-	addi $9, $0, 0
-	addi $10, $0, 0
-	addi $20, $0, 0
-	addi $24, $24, 0
-	addi $25, $25, 0
+forMarrom1: beq $20, $0, fimforMarrom1
+	sw $10, 0($24)
+	sw $10, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	
+	addi $20, $20, -1
+	j forMarrom1
+
+fimforMarrom1:
+	sw $9, 0($24)
+	sw $9, 0($25)
+	addi $24, $24, 980
+	addi $25, $25, 980
+	
+	# SEGUNDA LINHA
+	sw $10, 0($24)
+	sw $10, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	
+	addi $20, $0, 10
+	
+forLaranja1: beq $20, $0, fimforLaranja1
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	
+	addi $20, $20, -1
+	j forLaranja1
+
+fimforLaranja1:
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 980
+	addi $25, $25, 980
+	
+	# TERCEIRA LINHA
+
+	sw $10, 0($24)
+	sw $10, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	
+	addi $20, $0, 5
+	
+forMarrom2: beq $20, $0, fimforMarrom2
+	sw $10, 0($24)
+	sw $10, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	
+	addi $20, $20, -1
+	j forMarrom2
+
+fimforMarrom2:
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 980
+	addi $25, $25, 980
+	
+	# QUARTA LINHA
+	sw $10, 0($24)
+	sw $10, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $10, 0($24)
+	sw $10, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $10, 0($24)
+	sw $10, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $10, 0($24)
+	sw $10, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 980
+	addi $25, $25, 980
+	
+	# QUINTA E SEXTA LINHA
+	addi $20, $0, 2
+
+forQuintaESextaLinha:
+	beq $20, $0, fimforQuintaESextaLinha
+	sw $10, 0($24)
+	sw $10, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $10, 0($24)
+	sw $10, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $10, 0($24)
+	sw $10, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $10, 0($24)
+	sw $10, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $10, 0($24)
+	sw $10, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 980
+	addi $25, $25, 980
+	addi $20, $20, -1
+	j forQuintaESextaLinha
+
+fimforQuintaESextaLinha:
+	#Corre??o da cor da sexta linha
+	sw $10, -1000($24)
+	sw $10, -1000($25)
+	
+	# SETIMA LINHA
+	sw $10, 0($24)
+	sw $10, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $10, 0($24)
+	sw $10, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $10, 0($24)
+	sw $10, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 980
+	addi $25, $25, 980
+	
+	# OITAVA, NONA E DECIMA LINHA
+	addi $20, $20, 3
+
+for8910Linha:
+	beq $20, $0, fimfor8910Linha
+	sw $10, 0($24)
+	sw $10, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $10, 0($24)
+	sw $10, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $10, 0($24)
+	sw $10, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $12, 0($24)
+	sw $12, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 980
+	addi $25, $25, 980
+	addi $20, $20, -1
+	j for8910Linha
+
+fimfor8910Linha:
+	#correcao da decima linha
+	sw $13, -996($24)
+	sw $13, -996($25)
+	#correcao da nona linha
+	sw $13, -2012($24)
+	sw $13, -2012($25)
+	sw $13, -2020($24)
+	sw $13, -2020($25)
+	sw $13, -2024($24)
+	sw $13, -2024($25)
+	sw $13, -2028($24)
+	sw $13, -2028($25)
+	sw $13, -2040($24)
+	sw $13, -2040($25)
+	
+	# DECIMA PRIMEIRA LINHA 
+	addi $20, $20, 12
+	
+ultimaLinha:
+	beq $20, $0, fimUltimaLinha
+	sw $13, 0($24)
+	sw $13, 0($25)
+	addi $24, $24, 4
+	addi $25, $25, 4
+	
+	addi $20, $20, -1
+	j ultimaLinha
+fimUltimaLinha:
+	addi $1,$0,0
+	addi $9,$0,0
+	addi $10,$0,0
+	addi $11,$0,0
+	addi $12,$0,0
+	addi $13,$0,0
+	addi $24,$0,0
+	addi $25,$0,0
+	
 # ------------------- BLOCOS DE TIJOLOS -------------------
 iTijolos:
 
@@ -1903,6 +2158,8 @@ fimforPretoTij2:
 	addi $11,$0,0
 	addi $12,$0,0
 	addi $13,$0,0
+	addi $14,$0,0
+	addi $15,$0,0
 	addi $24,$0,0
 	addi $25,$0,0
 	
@@ -1910,50 +2167,75 @@ resetDeOutrosRegistradoresEmUso:
 	addi $16,$0,0
 	addi $17,$0,0
 	
-# ------------ SALVANDO FORA DO CENARIO (RECUPERACAO DO CENARIO APOS MOVIMENTO VIA PONTEIRO) ------------
-#	lui $8, 0x1001 
-#	addi $9, $0, 27136 # QTD UG
-#	
-#forSalvarFora:
-#	beq $9, $0, fimForSalvarFora
-#	lw $9, 0($8)
-#	sw $9, 131072($8)
-#	addi $8, $8, 4
-#	addi $9, $9, -1
-#	j forSalvarFora
-#	
-#fimForSalvarFora:
-#	addi $8,$0,0
-#	addi $9,$0,0
-#	addi $10,$0,0
+#====================== SALVANDO FORA DO CENARIO (RECUPERACAO DO CENARIO APOS MOVIMENTO VIA PONTEIRO) ====================== 
+	lui $8, 0x1001 
+	addi $9, $0, 32768 # QTD UG
 	
-# ------------------- ANIMACOES -------------------
-# NUVEM
-		# DIMENSÃ•ES : 21 x 16 pixels
-		
-		# COMPRIMENTO  21 pixels 
-		#	colunas: AV - BQ
-		# ALTURA : 16 pixels 
-		#	 linhas 10 - 26
-
-		# COMEÃ‡ANDO PELO MEIO - LINHA 19
-		
+forSalvarFora:
+	beq $9, $0, fimForSalvarFora
+	lw $10, 0($8)
+	sw $10, 131072($8)
+	addi $8, $8, 4
+	addi $9, $9, -1
+	j forSalvarFora
 	
-		
-
+fimForSalvarFora:
+	addi $8,$0,0
+	addi $9,$0,0
+	addi $10,$0,0	
 	
-lui $21, 0x1001
-	#COR A SER ALTERADA: LARANJA ($12)
-	addi $22, $0, 0 #quantidade de iteracoes
-#	addi $16, $0, 200 #quantidade de loops
-	ori $12, 0xfc9838
-	addi $1, $0, 0
-infinito: 	
 
+
+#===================================== ANIMACOES =====================================
+
+
+
+# ========= REGISTRADORES EM USO =========
+	
+	# ===== PONTEIROS =====
+
+		# $21 -> PONTEIRO DO MOVIMENTO DA NUVEM
+		# $24 -> BLOCO DE INTERROGACAO 1
+		# $25 -> BLOCO DE INTERROGACAO 2
+	
+	# ===== CONTROLADORES =====
+	
+		# $22 -> RESPONSAVEL POR TROCAR A COR DO BLOCO DE INTERROGACAO
+	
+	# ===== CORES =====
+	
+		# $9 -> PRETO
+		# $10 -> BRANCO
+		# $11 -> AZUL CLARO
+		# $12 -> MARIO - PELE
+		# $13 -> MARIO - VERMELHO
+		# $14 -> MARIO - BOTA, CABELO, BIGODE
+		# $15 -> COR DO FUNDO
+		
+	# +++++ NUVEM +++++
+	
+		# $9, $10, $11, $15, $21
+		
+	# +++++ BLOCOS DE INTERROGACAO +++++
+		
+		# $23, $24, $25
+		
+	# +++++ MARIO +++++
+		
+		# $8(dentro do escopo), $12, $13, $14
+	
+	lui $21, 0x1001
+	addi $22, $0, 0
+	#$24, $25 serao criados no escopo dos blocos de interrogacao
+	ori $23, 0xfc9838	# laranja (inicial)
 	ori $9, 0x000000	# preto
 	ori $10,0xffffff	# branco
 	ori $11,0x3cbcfc	# azul claro
+	ori $12,0xea9e22	# MARIO - PELE
+	ori $13,0xb53120	# MARIO - VERMELHO
+	ori $14,0x000000	# MARIO - BOTA, CABELO, BIGODE
 	ori $15,0x5c9df2	# cor do fundo
+infinito: 
 		
 	j movimento	
 	
@@ -2597,14 +2879,11 @@ movimento:
 	addi $21,$21,4
 
 fimNuvem2:
-	addi $9,$0,0
-	addi $10,$0,0
-	addi $11,$0,0
 	
 # ------------------- BLOCOS DE INTERROGACAO -------------------
-iInterrogacao:
+iInterrogacaoPisca:
 	
-for_iInterrogacao: 
+for_iInterrogacaoPisca: 
 #	beq $16, $0, fimTudo	
 	addi $1, $0, 0
  	lui $8, 0x1001
@@ -2615,348 +2894,228 @@ for_iInterrogacao:
 	add $25, $8, $1
 	addi $1, $0, 0
 	
-	ori $9, 0x5c94fc  #azul
-	ori $10, 0xc84c0c #marrom	
-	ori $11, 0xfcbcb0 #rosa
-#	ori $12, 0xfc9838 #laranja
-	ori $13, 0x000000 #preto
-	
 	# PRIMEIRA LINHA
-	sw $9, 0($24)
-	sw $9, 0($25)
+	
 	addi $24, $24, 4
 	addi $25, $25, 4
-	
-	addi $20, $0, 10
-	
-forMarrom1: beq $20, $0, fimforMarrom1
-	sw $10, 0($24)
-	sw $10, 0($25)
-	addi $24, $24, 4
-	addi $25, $25, 4
-	
-	addi $20, $20, -1
-	j forMarrom1
 
-fimforMarrom1:
-	sw $9, 0($24)
-	sw $9, 0($25)
+	addi $24, $24, 40
+	addi $25, $25, 40
+
 	addi $24, $24, 980
 	addi $25, $25, 980
-	
-	# SEGUNDA LINHA
-	sw $10, 0($24)
-	sw $10, 0($25)
+
 	addi $24, $24, 4
 	addi $25, $25, 4
 	
 	addi $20, $0, 10
 	
-forLaranja1: beq $20, $0, fimforLaranja1
-	sw $12, 0($24)
-	sw $12, 0($25)
+forLaranja1Pisca: beq $20, $0, fimforLaranja1Pisca
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
 	
 	addi $20, $20, -1
-	j forLaranja1
+	j forLaranja1Pisca
 
-fimforLaranja1:
-	sw $13, 0($24)
-	sw $13, 0($25)
+fimforLaranja1Pisca:
 	addi $24, $24, 980
 	addi $25, $25, 980
 	
 	# TERCEIRA LINHA
 
-	sw $10, 0($24)
-	sw $10, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $13, 0($24)
-	sw $13, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
 	
-	addi $20, $0, 5
+	addi $24, $24, 20
+	addi $25, $25, 20
 	
-forMarrom2: beq $20, $0, fimforMarrom2
-	sw $10, 0($24)
-	sw $10, 0($25)
-	addi $24, $24, 4
-	addi $25, $25, 4
 	
-	addi $20, $20, -1
-	j forMarrom2
-
-fimforMarrom2:
-	sw $12, 0($24)
-	sw $12, 0($25)
+fimforMarrom2Pisca:
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $13, 0($24)
-	sw $13, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $13, 0($24)
-	sw $13, 0($25)
 	addi $24, $24, 980
 	addi $25, $25, 980
 	
 	# QUARTA LINHA
-	sw $10, 0($24)
-	sw $10, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $10, 0($24)
-	sw $10, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $13, 0($24)
-	sw $13, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $13, 0($24)
-	sw $13, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $13, 0($24)
-	sw $13, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $10, 0($24)
-	sw $10, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $10, 0($24)
-	sw $10, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $13, 0($24)
-	sw $13, 0($25)
 	addi $24, $24, 980
 	addi $25, $25, 980
 	
 	# QUINTA E SEXTA LINHA
 	addi $20, $0, 2
 
-forQuintaESextaLinha:
-	beq $20, $0, fimforQuintaESextaLinha
-	sw $10, 0($24)
-	sw $10, 0($25)
+forQuintaESextaLinhaPisca:
+	beq $20, $0, fimforQuintaESextaLinhaPisca
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $10, 0($24)
-	sw $10, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $10, 0($24)
-	sw $10, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $13, 0($24)
-	sw $13, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $10, 0($24)
-	sw $10, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $10, 0($24)
-	sw $10, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $13, 0($24)
-	sw $13, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $13, 0($24)
-	sw $13, 0($25)
 	addi $24, $24, 980
 	addi $25, $25, 980
 	addi $20, $20, -1
-	j forQuintaESextaLinha
+	j forQuintaESextaLinhaPisca
 
-fimforQuintaESextaLinha:
-	#Corre??o da cor da sexta linha
-	sw $10, -1000($24)
-	sw $10, -1000($25)
+fimforQuintaESextaLinhaPisca:
 	
 	# SETIMA LINHA
-	sw $10, 0($24)
-	sw $10, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $13, 0($24)
-	sw $13, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $13, 0($24)
-	sw $13, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $10, 0($24)
-	sw $10, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $10, 0($24)
-	sw $10, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $13, 0($24)
-	sw $13, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $13, 0($24)
-	sw $13, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $13, 0($24)
-	sw $13, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $13, 0($24)
-	sw $13, 0($25)
 	addi $24, $24, 980
 	addi $25, $25, 980
 	
 	# OITAVA, NONA E DECIMA LINHA
 	addi $20, $20, 3
 
-for8910Linha:
-	beq $20, $0, fimfor8910Linha
-	sw $10, 0($24)
-	sw $10, 0($25)
+for8910LinhaPisca:
+	beq $20, $0, fimfor8910LinhaPisca
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $10, 0($24)
-	sw $10, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $10, 0($24)
-	sw $10, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $13, 0($24)
-	sw $13, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $12, 0($24)
-	sw $12, 0($25)
+	sw $23, 0($24)
+	sw $23, 0($25)
 	addi $24, $24, 4
 	addi $25, $25, 4
-	sw $13, 0($24)
-	sw $13, 0($25)
 	addi $24, $24, 980
 	addi $25, $25, 980
 	addi $20, $20, -1
-	j for8910Linha
+	j for8910LinhaPisca
 
-fimfor8910Linha:
-	#correcao da decima linha
-	sw $13, -996($24)
-	sw $13, -996($25)
-	#correcao da nona linha
-	sw $13, -2012($24)
-	sw $13, -2012($25)
-	sw $13, -2020($24)
-	sw $13, -2020($25)
-	sw $13, -2024($24)
-	sw $13, -2024($25)
-	sw $13, -2028($24)
-	sw $13, -2028($25)
-	sw $13, -2040($24)
-	sw $13, -2040($25)
+fimfor8910LinhaPisca:
+	sw $9, -2012($24)
+	sw $9, -2012($25)
+	sw $9, -2040($24)
+	sw $9, -2040($25)
 	
-	# DECIMA PRIMEIRA LINHA 
-	addi $20, $20, 12
-	
-ultimaLinha:
-	beq $20, $0, fimUltimaLinha
-	sw $13, 0($24)
-	sw $13, 0($25)
-	addi $24, $24, 4
-	addi $25, $25, 4
-	
-	addi $20, $20, -1
-	j ultimaLinha
-fimUltimaLinha:
+ultimaLinhaPisca:
+	# beq $20, $0, fimUltimaLinha
+	# j ultimaLinha
+fimUltimaLinhaPisca:
 	beq $22, 0, iCorLaranja
 	beq $22, 1, iCorMarromClaro
 	beq $22, 2, iCorMarromEscuro
@@ -2964,19 +3123,19 @@ fimUltimaLinha:
 	j iCorLaranja
 	
 iCorLaranja:
-	addi $12, $0, 0
-	ori $12, 0xe79c21
+	addi $23, $0, 0
+	ori $23, 0xe79c21
 	beq $22, 4, resetarControleDeCores
 	j seguirComOPisca
 	
 iCorMarromClaro:
-	addi $12, $0, 0
-	ori $12, 0x994e00
+	addi $23, $0, 0
+	ori $23, 0x994e00
 	j seguirComOPisca
 
 iCorMarromEscuro:
-	addi $12, $0, 0
-	ori $12, 0x561d00
+	addi $23, $0, 0
+	ori $23, 0x561d00
 	j seguirComOPisca
 	
 resetarControleDeCores:
@@ -2984,28 +3143,21 @@ resetarControleDeCores:
 	
 seguirComOPisca:
 	addi $22, $22, 1
-	j timerPisca
+	j timer
 #	addi $16, $16, -1
 #	j for_iInterrogacao
 	
-timerPisca:  addi $17, $0, 100000
+timer:  addi $17, $0, 100000
 
 fortimer: 
-	beq $17, $0, fimTudo
+	beq $17, $0, fimPisca
 	nop
 	addi $17, $17, -1
 	j fortimer  
 	     
-fimTudo:
-	addi $1,$0,0
-	addi $9,$0,0
-	addi $10,$0,0
-	addi $11,$0,0
-	addi $13,$0,0
-	addi $16,$0,0
-	addi $17,$0,0
+fimPisca:
 	addi $24,$0,0
 	addi $25,$0,0
-
+fimTudo:
 	j infinito
 	
