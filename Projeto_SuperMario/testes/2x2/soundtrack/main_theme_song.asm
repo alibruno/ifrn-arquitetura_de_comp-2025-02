@@ -5,38 +5,37 @@
 			
 			# COLOCAR O TEMPO DE DURAÇÃO EM CADA NOTA
 
-main:	addi $5, $0,350		# duração da nota
+main:	
 	addi $6,$0,0		# instrumento
 	addi $7,$0,100		# volume
 
 	# MI
+	addi $5,$0,300
 	addi $4,$0,64
 	addi $2,$0,31
 	syscall
 	
 	# PAUSA
-	addi $4,$0,250
+	addi $4,$0,300
 	addi $2,$0,32
 	syscall
 	
 	# MI
+	addi $5,$0,300
 	addi $4,$0,64
 	addi $2,$0,31
 	syscall
 	
 	# PAUSA
-	addi $4,$0,250
+	addi $4,$0,300
 	addi $2,$0,32
 	syscall
 	
-	addi $5,$5,170
-	
 	# MI
+	addi $5,$0,300
 	addi $4,$0,64
 	addi $2,$0,31
 	syscall
-	
-	addi $5,$5,-170
 	
 	# PAUSA NO MEIO
 	addi $4,$0,320
@@ -44,35 +43,32 @@ main:	addi $5, $0,350		# duração da nota
 	syscall
 	
 	# DO
+	addi $5,$0,400
 	addi $4,$0,60
 	addi $2,$0,31
 	syscall
-
+	
 	# PAUSA
 	addi $4,$0,300
 	addi $2,$0,32
 	syscall
 	
-	addi $5,$5,150
-	
 	# MI
+	addi $5,$5,400
 	addi $4,$0,64
 	addi $2,$0,31
 	syscall
 	
-	
 	# PAUSA
 	addi $4,$0,300
 	addi $2,$0,32
 	syscall
-
 	
 	# SOL
+	addi $5,$0,500
 	addi $4,$0,67
 	addi $2,$0,31
 	syscall
-	
-	addi $5,$5,-200
 	
 	# PAUSA FINAL
 	addi $4,$0,600
@@ -80,7 +76,7 @@ main:	addi $5, $0,350		# duração da nota
 	syscall
 	
 	# SOL GRAVE
+	addi $5,$0,600
 	addi $4,$0,55
 	addi $2,$0,31
 	syscall
-	

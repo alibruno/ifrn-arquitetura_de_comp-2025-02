@@ -23,7 +23,7 @@ main:	addi $6,$0,0		# INSTRUMENTO
 	syscall
 	
 	# F
-	addi $5,$0,350
+	addi $5,$0,450
 	addi $4,$0,53
 	addi $2,$0,31
 	syscall
@@ -34,7 +34,7 @@ main:	addi $6,$0,0		# INSTRUMENTO
 	syscall
 	
 	# F
-	addi $5,$0,350
+	addi $5,$0,450
 	addi $4,$0,53
 	addi $2,$0,31
 	syscall
@@ -45,7 +45,7 @@ main:	addi $6,$0,0		# INSTRUMENTO
 	syscall
 	
 	# F
-	addi $5,$0,350
+	addi $5,$0,450
 	addi $4,$0,53
 	addi $2,$0,31
 	syscall
@@ -56,7 +56,7 @@ main:	addi $6,$0,0		# INSTRUMENTO
 	syscall
 	
 	# E
-	addi $5,$0,600
+	addi $5,$0,700
 	addi $4,$0,52
 	addi $2,$0,31
 	syscall
@@ -67,7 +67,7 @@ main:	addi $6,$0,0		# INSTRUMENTO
 	syscall
 	
 	# D
-	addi $5,$0,700
+	addi $5,$0,800
 	addi $4,$0,50
 	addi $2,$0,31
 	syscall
