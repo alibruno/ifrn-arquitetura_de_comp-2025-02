@@ -19,7 +19,7 @@ fimceu:
 
 
 				# ARBUSTO
-				# DIMENSÕES 40 X 7 PIXELS
+				# DIMENSï¿½ES 40 X 7 PIXELS
 				# COMPRIMENTO : 40 PIXELS (CW - EJ)
 				# ALTURA: 7 PIXELS (106 - 112)
 
@@ -1381,7 +1381,7 @@ iCano:	lui $8,0x1001
 	sw $10,0($8)
 	addi $8,$8,4
 	
-	# PESCOÇO
+	# PESCOï¿½O
 	# LINHA 8 = 99
 	addi $8,$8,-1072
 	
@@ -1411,7 +1411,7 @@ iCano:	lui $8,0x1001
 	addi $8,$8,4
 	
 	
-	# "CABEÇA"
+	# "CABEï¿½A"
 	# LINHA 9 = 98
 	addi $8,$8,-1072
 	
