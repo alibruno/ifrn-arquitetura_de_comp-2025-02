@@ -2802,13 +2802,18 @@ fimForSalvarFora:
 	addi $9,$0,0
 	addi $10,$0,0	
 
+	jal preConfDesenharMario1
+	j animacoes
+	
+#=================================== DESEENHO MARIO 1 ===================================
+preConfDesenharMario1:
 	ori $12,0xea9e22	# MARIO - PELE
 	ori $13,0xb53120	# MARIO - VERMELHO
 	ori $14,0x000000	# MARIO - BOTA, CABELO, BIGODE
 	
 	lui $17, 0xffff
+	lui $4, 0x1001
 	
-lui $4, 0x1001
 desenharMario1:
 	#LINHA 1 : 106
 	sw $14,107688($4)
@@ -2985,8 +2990,11 @@ desenharMario1:
 	sw $13,92348($4)
 	sw $13,92352($4)
 	sw $13,92356($4)
+	
+	jr $31
+	
 #===========================================================================================================================================================================
-
+animacoes:
 #Registradores usados:
 	#Mario
 		# $12, $13, $14, $4
@@ -3010,6 +3018,13 @@ desenharMario1:
 	ori $10,0xb53120	# VERMELHO
 	ori $11,0xD98723	# AMARELO
 	lui $23, 0x1001
+		
+	ori $12,0xea9e22	# MARIO - PELE
+	ori $13,0xb53120	# MARIO - VERMELHO
+	ori $14,0x000000	# MARIO - BOTA, CABELO, BIGODE
+	
+	lui $17, 0xffff
+	lui $4, 0x1001
 infinito:
 	#movimentacao mario 
 	lw $16, 0($17)
