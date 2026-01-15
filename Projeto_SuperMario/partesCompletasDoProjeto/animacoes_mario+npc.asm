@@ -4357,7 +4357,7 @@ loopPeixeSubi:
 	
 resetLoop:
 	addi $15, $0, 47
-	jr $31 #volta para o rótulo de verificacao (j infinito) ou rótulo do mario 
+	jr $31 #volta para o rï¿½tulo de verificacao (j infinito) ou rï¿½tulo do mario 
 
 loopPeixePos:
 	# LINHA 1: 59
