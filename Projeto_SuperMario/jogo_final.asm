@@ -6594,7 +6594,8 @@ fimForSalvarFora:
 	addi $8,$0,0
 	addi $9,$0,0
 	addi $10,$0,0	
-
+	addi $19, $0, 0
+	addi $21, $0, 0
 	jal preConfDesenharMario1
 	j animacoes
 	
@@ -6787,30 +6788,41 @@ desenharMario1:
 	jr $31
 	
 #===========================================================================================================================================================================
+#===========================================================================================================================================================================
 animacoes:
 #Registradores usados:
-	#Mario
+	# MARIO
 		# $12, $13, $14, $4
 		# $12, $13, $14 -> cores
 		# $4 -> ponteiro
 		# TEMPORARIOS 
 			# $17 -> entrada
-			# $18 -> leitura
+			# $16 -> leitura
 			# $20 -> loop
-			# $5 e $6 -> controladores do movimento
-			# $27, $28, $29 -> auxiliares
-			
-	#Peixe
-		# $9, $10, $11, $8
-		# $9, $10, $11 -> cores
+			# $5, $6, $7 -> controladores do movimento
+			# $26 -> recuperacao rotina ($31)
+			# $28 -> ponteiro para apagar rotina
+	# NPC
+		# $9, $10, $11, $18, $8
+		# $9, $10, $11, $18 -> cores
 		# $8 -> ponteiro
 		# TEMPORARIOS
-			# $15 -> loop
-			# $19 -> recuperar cenario
+			# $22 e $15 -> loop
+			# $24 -> recuperacao rotina ($31)
+			# $19 -> loop para trocar o sprite do fantasma
+			# $21 -> controlador do sprite do fantasma
+		
+	# COMUM A TODOS
+		# $23, $29, $30
+		
+	# REGISTRADORES LIVRES
+		# $25, $27
 			
-	ori $9,0xffffff		# PEIXE - BRANCO
-	ori $10,0xb53120	# PEIXE - VERMELHO
-	ori $11,0xD98723	# PEIXE - AMARELO
+	ori $9,0xffffff		# FANTASMA - BRANCO
+	ori $10,0xf2f2f2	# FANTASMA - CINZA CLARO
+	ori $11,0xbfbfbf	# FANTASMA - CINZA ESCURO
+	ori $18, 0xf21365	# FANTASMA - ROSA
+	
 	lui $8, 0x1001
 	
 	ori $12,0xea9e22	# MARIO - PELE
@@ -6823,21 +6835,21 @@ infinito:
 	#movimentacao mario 
 	lw $16, 0($17)
         beq $16, $0, continue
-        lw $18, 4($17)
-        addi $19, $0, ' '
-        beq $18, $19, fim
-        addi $19, $0, 'd'
-        beq $18, $19, moveR
-        addi $19, $0, 'a'
-        beq $18, $19, moveL
+        lw $16, 4($17)
+        addi $23, $0, ' '
+        beq $16, $23, fim
+        addi $23, $0, 'd'
+        beq $16, $23, moveR
+        addi $23, $0, 'a'
+        beq $16, $23, moveL
         
 continue:
-	jal movePeixeVerificacao
+	jal moveNpcVerificacao
 	j infinito
        
-movePeixeVerificacao:
-	beq $22, $0, loopPeixeSubi
-	beq $22, 1, loopPeixeDesc
+moveNpcVerificacao:
+	beq $22, $0, loopNpcSubi
+	beq $22, 1, loopNpcDesc
        
 moveR:  
 	addi $5, $0, 4 #incremento
@@ -7061,7 +7073,7 @@ forRotinaMario1:
 	beq $6, 0, apagarRotinaMario1MoveR
 	beq $6, 1, apagarRotinaMario1MoveL
 	
-	#jal movePeixeVerificacao
+	#jal moveNpcVerificacao
 	#jal verificarVitoria
 	#j forRotinaMario1
 	
@@ -7120,7 +7132,7 @@ sw $29, 93356($28)
 lw $29, 223408($28)
 sw $29, 92336($28)
 	
-	jal movePeixeVerificacao
+	jal moveNpcVerificacao
 	jal verificarVitoria
 	j forRotinaMario1
 	
@@ -7197,7 +7209,7 @@ sw $29, 93396($28)
 lw $29, 223424($28)
 sw $29, 92360($28)
 
-	jal movePeixeVerificacao
+	jal moveNpcVerificacao
 	jal verificarVitoria
 	j forRotinaMario1
 fimRotinaMario1:
@@ -7388,9 +7400,6 @@ forRotinaMario2:
 	sw $13,93372($4)
 	sw $13,93376($4)
 	
-	lw $25,224428 ($4)
-	sw $25, 93360($4)
-	
 	add $4, $4, $5
 	addi $20, $20, -1
 	jal timerRotinas	
@@ -7401,7 +7410,7 @@ forRotinaMario2:
 	beq $6, 0, apagarRotinaMario2MoveR
 	beq $6, 1, apagarRotinaMario2MoveL
 	
-	#jal movePeixeVerificacao
+	#jal moveNpcVerificacao
 	#jal verificarVitoria
 	#j forRotinaMario2
 	
@@ -7451,7 +7460,7 @@ sw $29, 94376($28)
 lw $29, 224428($28)
 sw $29, 93356($28)
 	
-	jal movePeixeVerificacao
+	jal moveNpcVerificacao
 	jal verificarVitoria
 	j forRotinaMario2
 	
@@ -7516,7 +7525,7 @@ sw $29, 94416($28)
 lw $29, 224444($28)
 sw $29, 93380($28)
 
-	jal movePeixeVerificacao
+	jal moveNpcVerificacao
 	jal verificarVitoria
 	j forRotinaMario2
 fimRotinaMario2:
@@ -7700,7 +7709,7 @@ forRotinaMario3:
 	beq $6, 0, apagarRotinaMario3MoveR
 	beq $6, 1, apagarRotinaMario3MoveL
 	
-	#jal movePeixeVerificacao
+	#jal moveNpcVerificacao
 	#jal verificarVitoria
 	#j forRotinaMario3
 	
@@ -7753,7 +7762,7 @@ sw $29, 93344($28)
 lw $29, 223396($28)
 sw $29, 92324($28)
 	
-	jal movePeixeVerificacao
+	jal moveNpcVerificacao
 	jal verificarVitoria
 	j forRotinaMario3
 	
@@ -7822,7 +7831,7 @@ sw $29, 93384($28)
 lw $29, 223412($28)
 sw $29, 92348($28)
 	
-	jal movePeixeVerificacao
+	jal moveNpcVerificacao
 	jal verificarVitoria
 	j forRotinaMario3
 	
@@ -8003,7 +8012,7 @@ forRotinaMario4:
 	beq $6, 0, apagarRotinaMario4MoveR
 	beq $6, 1, apagarRotinaMario4MoveL
 	
-	#jal movePeixeVerificacao
+	#jal moveNpcVerificacao
 	#jal verificarVitoria
 	#j forRotinaMario4
 	
@@ -8053,7 +8062,7 @@ sw $29, 94364($28)
 lw $29, 224416($28)
 sw $29, 93344($28)
 
-	jal movePeixeVerificacao
+	jal moveNpcVerificacao
 	jal verificarVitoria
 	j forRotinaMario4
 	
@@ -8118,35 +8127,35 @@ sw $29, 94404($28)
 lw $29, 224436($28)
 sw $29, 93372($28)
 	
-	jal movePeixeVerificacao
+	jal moveNpcVerificacao
 	jal verificarVitoria
 	j forRotinaMario4
 	
 fimRotinaMario4: add $31, $0, $26
 	jr $31
 	
-timerRotinas:  addi $21, $0, 5000
+timerRotinas:  addi $23, $0, 5000
 
 fortimerRotinas: 
-	beq $21, $0, fimtimerRotinas
+	beq $23, $0, fimtimerRotinas
 	nop
-	addi $21, $21, -1
+	addi $23, $23, -1
 	j fortimerRotinas
 	
 fimtimerRotinas:
 	jr $31
 	
 apagarMario:
-	lui $27, 0x1001
+	lui $23, 0x1001
 	ori $1, $0, 92160
-	add $27, $27, $1
+	add $23, $23, $1
 	addi $1, $0, 0
 	addi $20, $0, 4351
 forApagarMario:
 	beq $20, $0, fimForApagarMario
-	lw $29, 131072($27)
-	sw $29, 0($27)
-	addi $27, $27, 4
+	lw $29, 131072($23)
+	sw $29, 0($23)
+	addi $23, $23, 4
 	addi $20, $20, -1
 	j forApagarMario
 fimForApagarMario:
@@ -8157,44 +8166,44 @@ addi $23, $0, 0
 lui $30, 0x1001
 ori $23, 0x5c9df2
 
-lw $19, 96204($30)
-bne $19, $23, vitoria
+lw $29, 96204($30)
+bne $29, $23, vitoria
 
-lw $19, 97228($30)
-bne $19, $23, vitoria
+lw $29, 97228($30)
+bne $29, $23, vitoria
 
-lw $19, 98252($30)
-bne $19, $23, vitoria
+lw $29, 98252($30)
+bne $29, $23, vitoria
 
-lw $19, 99276($30)
-bne $19, $23, vitoria
+lw $29, 99276($30)
+bne $29, $23, vitoria
 
-lw $19, 100300($30)
-bne $19, $23, vitoria
+lw $29, 100300($30)
+bne $29, $23, vitoria
 
-#lw $19, 101336($30)
-#bne $19, $23, vitoria
+#lw $29, 101336($30)
+#bne $29, $23, vitoria
 
-lw $19, 102360($30)
-bne $19, $23, vitoria
+lw $29, 102360($30)
+bne $29, $23, vitoria
 
-lw $19, 103384($30)
-bne $19, $23, vitoria
+lw $29, 103384($30)
+bne $29, $23, vitoria
 
-lw $19, 104408($30)
-bne $19, $23, vitoria
+lw $29, 104408($30)
+bne $29, $23, vitoria
 
-lw $19, 105432($30)
-bne $19, $23, vitoria
+lw $29, 105432($30)
+bne $29, $23, vitoria
 
-lw $19, 106456($30)
-bne $19, $23, vitoria
+lw $29, 106456($30)
+bne $29, $23, vitoria
 
-lw $19, 107480($30)
-bne $19, $23, vitoria
+lw $29, 107480($30)
+bne $29, $23, vitoria
 
-lw $19, 108504($30)
-bne $19, $23, vitoria
+lw $29, 108504($30)
+bne $29, $23, vitoria
 
 addi $23, $0, 0
 addi $30, $0, 0
@@ -8203,457 +8212,719 @@ addi $30, $0, 0
 	
 #===========================================================
 
-loopPeixeSubi:
-	beq $15, $0, resetLoop
-	add $24, $0, $31
-	j loopPeixePos
+desenharFantasmaVerificacao:
+	beq $19, $0, resetLoopAnimacaoFantasma
+	addi $19, $19, -1
+	beq $21, 0, desenharFantasma1
+	beq $21, 1, desenharFantasma2
 	
-resetLoop:
-	addi $15, $0, 47
-	jr $31 #volta para o rï¿½tulo de verificacao (j infinito) ou rï¿½tulo do mario 
-
-loopPeixePos:
-	# LINHA 1: 59
-	sw $9,59696($8)
-	sw $9,59700($8)
-	sw $9,59704($8)
-	sw $9,59708($8)
+resetLoopAnimacaoFantasma:
+	addi $19, $0, 15
+	xori $21, $21, 1
+	j desenharFantasmaVerificacao
 	
-	# LINHA 2: 58
-	sw $9,58668($8)
-	sw $9,58672($8)
-	sw $9,58676($8)
-	sw $9,58680($8)
-	sw $9,58684($8)
-	sw $9,58688($8)
-	sw $10,58692($8)
-	#sw $9,58696($8)
-	sw $11,58700($8)
-	sw $11,58704($8)
-
-	#LINHA 3: 57
-	sw $11,57640($8)
-	sw $11,57644($8)
-	sw $11,57648($8)
-	sw $9,57652($8)
-	sw $9,57656($8)
-	sw $9,57660($8)
-	sw $10,57664($8)
-	sw $10,57668($8)
-	sw $10,57672($8)
-	sw $11,57676($8)
-	sw $11,57680($8)
-	sw $11,57684($8)					
+desenharFantasma1:
+	# LINHA 1: 48
+					
+	sw $14,48432($8)
+	sw $14,48436($8)
+	sw $14,48440($8)
+	sw $14,48444($8)
+	sw $14,48448($8)
 	
-	# LINHA 4: 56
-	sw $10,56620($8)
-	sw $11,56624($8)
-	sw $9,56628($8)
-	sw $9,56632($8)
-	sw $10,56636($8)
-	sw $10,56640($8)
-	sw $10,56644($8)
-	sw $10,56648($8)
-	sw $10,56652($8)
-	sw $11,56656($8)
-	sw $11,56660($8)
-			
+	# LINHA 2: 49							
+	sw $14,49448($8)
+	sw $14,49452($8)
+	sw $11,49456($8)
+	sw $11,49460($8)
+	sw $11,49464($8)
+	sw $11,49468($8)
+	sw $11,49472($8)
+	sw $14,49476($8)
+	sw $14,49480($8)
 	
-	# LINHA 5: 55
-	sw $10,55596($8)
-	sw $11,55600($8)
-	sw $10,55604($8)
-	sw $10,55608($8)
-	sw $10,55612($8)
-	sw $10,55616($8)
-	sw $10,55620($8)
-	sw $10,55624($8)
-	sw $10,55628($8)
-	#sw $9,55632($8)
-	sw $11,55636($8)			
-	
-	# LINHA 6: 54
-	sw $11,54568($8)
-	sw $11,54572($8)
-	sw $10,54576($8)
-	sw $10,54580($8)
-	sw $10,54584($8)
-	sw $10,54588($8)
-	sw $9,54592($8)
-	sw $9,54596($8)
-	sw $9,54600($8)
-	sw $9,54604($8)
-	sw $9,54608($8)
-
-	# LINHA 7: 53
-	sw $9,53544($8)
-	sw $9,53548($8)
-	sw $9,53552($8)
-	sw $9,53556($8)
-	sw $10,53560($8)
-	sw $10,53564($8)
-	sw $10,53568($8)
-	sw $9,53572($8)
-	sw $9,53576($8)
-	sw $9,53580($8)
-	sw $9,53584($8)
-	sw $9,53588($8)	
-	
-	# LINHA 8: 52
-	sw $10,52520($8)
-	sw $9,52524($8)
-	sw $10,52528($8)
-	sw $9,52532($8)
-	sw $10,52536($8)
-	sw $10,52540($8)
-	sw $10,52544($8)
-	sw $10,52548($8)
-	sw $9,52552($8)
-	sw $9,52556($8)
-	sw $9,52560($8)
-	sw $9,52564($8)
-	
-	# LINHA 9 : 51
-	sw $9,51496($8)
-	sw $10,51500($8)
-	sw $9,51504($8)
-	sw $9,51508($8)
-	sw $10,51512($8)
-	sw $10,51516($8)
-	sw $10,51520($8)
-	sw $10,51524($8)
-	sw $10,51528($8)
-	sw $9,51532($8)
-	sw $9,51536($8)		
-	
-	# LINHA 10: 50
-	sw $10,50476($8)
+	# LINHA 3: 50									
+	sw $14,50468($8)
+	sw $11,50472($8)
+	sw $11,50476($8)
 	sw $10,50480($8)
 	sw $10,50484($8)
 	sw $10,50488($8)
 	sw $10,50492($8)
-	sw $10,50496($8)
-	sw $10,50500($8)
-	sw $10,50504($8)
-	sw $11,50508($8)	
+	sw $11,50496($8)
+	sw $11,50500($8)
+	sw $11,50504($8)
+	sw $14,50508($8)
+	sw $14,50512($8)
 	
-	# LINHA 11: 50
+	# LINHA 4: 51						
+	sw $14,51484($8)
+	sw $11,51488($8)
+	sw $9,51492($8)
+	sw $9,51496($8)
+	sw $9,51500($8)
+	sw $9,51504($8)
+	sw $14,51508($8)
+	sw $14,51512($8)
+	sw $14,51516($8)
+	sw $10,51520($8)
+	sw $10,51524($8)
+	sw $11,51528($8)
+	sw $11,51532($8)
+	sw $14,51536($8)
+	sw $14,51540($8)
+	
+	
+	# LINHA 5: 52					
+	sw $14,52508($8)
+	sw $11,52512($8)
+	sw $14,52516($8)
+	sw $14,52520($8)
+	sw $14,52524($8)
+	sw $9,52528($8)
+	sw $9,52532($8)
+	sw $14,52536($8)
+	sw $14,52540($8)
+	sw $9,52544($8)
+	sw $9,52548($8)
+	sw $10,52552($8)
+	sw $10,52556($8)
+	sw $11,52560($8)
+	sw $14,52564($8)
+	
+	# LINHA 5: 53					
+	sw $14,53528($8)
+	sw $11,53532($8)
+	sw $10,53536($8)
+	sw $14,53540($8)
+	sw $14,53544($8)
+	sw $9,53548($8)
+	sw $9,53552($8)
+	sw $14,53556($8)
+	sw $14,53560($8)
+	sw $14,53564($8)
+	sw $9,53568($8)
+	sw $9,53572($8)
+	sw $14,53576($8)
+	sw $14,53580($8)
+	sw $14,53584($8)
+	
+	# LINHA 6: 54				
+	sw $14,54552($8)
+	sw $11,54556($8)
+	sw $10,54560($8)
+	sw $14,54564($8)
+	sw $14,54568($8)
+	sw $14,54572($8)
+	sw $9,54576($8)
+	sw $9,54580($8)
+	sw $9,54584($8)
+	sw $9,54588($8)
+	sw $9,54592($8)
+	sw $9,54596($8)
+	sw $9,54600($8)
+	sw $10,54604($8)
+	sw $14,54608($8)
+	sw $14,54612($8)
+	
+	# LINHA 7: 55					
+	sw $14,55576($8)
+	sw $11,55580($8)
+	sw $14,55584($8)
+	sw $9,55588($8)
+	sw $18,55592($8)
+	sw $18,55596($8)
+	sw $9,55600($8)
+	sw $9,55604($8)
+	sw $9,55608($8)
+	sw $9,55612($8)
+	sw $14,55616($8)
+	sw $9,55620($8)
+	sw $9,55624($8)
+	sw $10,55628($8)
+	sw $14,55632($8)
+	sw $14,55636($8)
+	
+	# LINHA 8: 56						
+	sw $14,56600($8)
+	sw $10,56604($8)
+	sw $14,56608($8)
+	sw $18,56612($8)
+	sw $18,56616($8)
+	sw $18,56620($8)
+	sw $18,56624($8)
+	sw $9,56628($8)
+	sw $9,56632($8)
+	sw $14,56636($8)
+	sw $14,56640($8)
+	sw $9,56644($8)
+	sw $9,56648($8)
+	sw $14,56652($8)
+	sw $11,56656($8)
+	sw $14,56660($8)
+	
+	# LINHA 9: 57						
+	sw $14,57624($8)
+	sw $11,57628($8)
+	sw $14,57632($8)
+	sw $18,57636($8)
+	sw $18,57640($8)
+	sw $18,57644($8)
+	sw $18,57648($8)
+	sw $14,57652($8)
+	sw $14,57656($8)
+	sw $14,57660($8)
+	sw $14,57664($8)
+	sw $9,57668($8)
+	sw $14,57672($8)
+	sw $10,57676($8)
+	sw $14,57680($8)
+	
+	# LINHA 10: 58					
+	sw $14,58648($8)
+	sw $11,58652($8)
+	sw $10,58656($8)
+	sw $14,58660($8)
+	sw $18,58664($8)
+	sw $18,58668($8)
+	sw $18,58672($8)
+	sw $18,58676($8)
+	sw $14,58680($8)
+	sw $14,58684($8)
+	sw $9,58688($8)
+	sw $9,58692($8)
+	sw $9,58696($8)
+	sw $10,58700($8)
+	sw $11,58704($8)
+	sw $14,58708($8)
+	
+	
+	# LINHA 11: 59						
+	sw $14,59676($8)
+	sw $11,59680($8)
+	sw $10,59684($8)
+	sw $14,59688($8)
+	sw $14,59692($8)
+	sw $14,59696($8)
+	sw $14,59700($8)
+	sw $14,59704($8)
+	sw $9,59708($8)
+	sw $9,59712($8)
+	sw $9,59716($8)
+	sw $9,59720($8)
+	sw $10,59724($8)
+	sw $11,59728($8)
+	sw $14,59732($8)
+	
+	# LINHA 12: 60					
+	sw $14,60704($8)
+	sw $11,60708($8)
+	sw $11,60712($8)
+	sw $10,60716($8)
+	sw $10,60720($8)
+	sw $10,60724($8)
+	sw $10,60728($8)
+	sw $10,60732($8)
+	sw $10,60736($8)
+	sw $10,60740($8)
+	sw $11,60744($8)
+	sw $11,60748($8)
+	sw $14,60752($8)
+	
+	# LINHA 13: 61				
+	sw $14,61732($8)
+	sw $14,61736($8)
+	sw $11,61740($8)
+	sw $11,61744($8)
+	sw $11,61748($8)
+	sw $11,61752($8)
+	sw $11,61756($8)
+	sw $11,61760($8)
+	sw $11,61764($8)
+	sw $14,61768($8)
+	sw $14,61772($8)
+	
+	# LINHA 14: 62				
+	sw $14,62764($8)
+	sw $14,62768($8)
+	sw $14,62772($8)
+	sw $14,62776($8)
+	sw $14,62780($8)
+	sw $14,62784($8)
+	sw $14,62788($8)
+	jr $31
+	
+desenharFantasma2:
+	# LINHA 1: 48
+					
+	sw $14,48432($8)
+	sw $14,48436($8)
+	sw $14,48440($8)
+	sw $14,48444($8)
+	sw $14,48448($8)
+	
+	# LINHA 2: 49							
+	sw $14,49448($8)
+	sw $14,49452($8)
+	sw $11,49456($8)
+	sw $11,49460($8)
 	sw $11,49464($8)
 	sw $11,49468($8)
 	sw $11,49472($8)
-	sw $11,49476($8)
-	sw $11,49480($8)
+	sw $14,49476($8)
+	sw $14,49480($8)
 	
-	# LINHA 12: 49
-	sw $11,48436($8)
-	sw $11,48440($8)
-	sw $11,48444($8)
-	sw $11,48448($8)
-	sw $11,48452($8)
+	# LINHA 3: 50									
+	sw $14,50468($8)
+	sw $11,50472($8)
+	sw $11,50476($8)
+	sw $10,50480($8)
+	sw $10,50484($8)
+	sw $10,50488($8)
+	sw $10,50492($8)
+	sw $11,50496($8)
+	sw $11,50500($8)
+	sw $11,50504($8)
+	sw $14,50508($8)
+	sw $14,50512($8)
+	
+	# LINHA 4: 51						
+	sw $14,51484($8)
+	sw $11,51488($8)
+	sw $9,51492($8)
+	sw $9,51496($8)
+	sw $9,51500($8)
+	sw $9,51504($8)
+	sw $14,51508($8)
+	sw $14,51512($8)
+	sw $14,51516($8)
+	sw $10,51520($8)
+	sw $10,51524($8)
+	sw $11,51528($8)
+	sw $11,51532($8)
+	sw $14,51536($8)
+	sw $14,51540($8)
+	
+	
+	# LINHA 5: 52					
+	sw $14,52508($8)
+	sw $11,52512($8)
+	sw $14,52516($8)
+	sw $14,52520($8)
+	sw $14,52524($8)
+	sw $9,52528($8)
+	sw $9,52532($8)
+	sw $14,52536($8)
+	sw $14,52540($8)
+	sw $9,52544($8)
+	sw $9,52548($8)
+	sw $10,52552($8)
+	sw $10,52556($8)
+	sw $11,52560($8)
+	sw $14,52564($8)
+	
+	# ====== IGUAL ======
+	
+	# LINHA 6: 53					
+	sw $14,53528($8)
+	sw $11,53532($8)
+	sw $10,53536($8)
+	sw $14,53540($8)
+	sw $14,53544($8)
+	sw $9,53548($8)
+	sw $9,53552($8)
+	sw $14,53556($8)
+	sw $14,53560($8)
+	sw $9,53564($8)
+	sw $9,53568($8)
+	sw $9,53572($8)
+	sw $10,53576($8)
+	sw $11,53580($8)
+	sw $14,53584($8)
+	
+	# LINHA 7: 54				
+	sw $14,54552($8)
+	sw $11,54556($8)
+	sw $10,54560($8)
+	sw $14,54564($8)
+	sw $14,54568($8)
+	sw $14,54572($8)
+	sw $9,54576($8)
+	sw $9,54580($8)
+	sw $9,54584($8)
+	sw $9,54588($8)
+	sw $9,54592($8)
+	sw $9,54596($8)
+	sw $14,54600($8)
+	sw $10,54604($8)
+	sw $11,54608($8)
+	sw $14,54612($8)
+	
+	# LINHA 8: 55					
+	sw $14,55576($8)
+	sw $11,55580($8)
+	sw $14,55584($8)
+	sw $9,55588($8)
+	sw $9,55592($8)
+	sw $9,55596($8)
+	sw $9,55600($8)
+	sw $9,55604($8)
+	sw $9,55608($8)
+	sw $9,55612($8)
+	sw $14,55616($8)
+	sw $9,55620($8)
+	sw $9,55624($8)
+	sw $14,55628($8)
+	sw $11,55632($8)
+	sw $14,55636($8)
+	
+	# LINHA 9: 56						
+	sw $14,56600($8)
+	sw $10,56604($8)
+	sw $14,56608($8)
+	sw $9,56612($8)
+	sw $9,56616($8)
+	sw $9,56620($8)
+	sw $9,56624($8)
+	sw $9,56628($8)
+	sw $9,56632($8)
+	sw $14,56636($8)
+	sw $14,56640($8)
+	sw $9,56644($8)
+	sw $9,56648($8)
+	sw $9,56652($8)
+	sw $14,56656($8)
+	sw $14,56660($8)
+	
+	# LINHA 10: 57						
+	sw $14,57624($8)
+	sw $11,57628($8)
+	sw $14,57632($8)
+	sw $14,57636($8)
+	sw $14,57640($8)
+	sw $14,57644($8)
+	sw $14,57648($8)
+	sw $14,57652($8)
+	sw $14,57656($8)
+	sw $14,57660($8)
+	sw $14,57664($8)
+	sw $14,57668($8)
+	sw $9,57672($8)
+	sw $9,57676($8)
+	sw $14,57680($8)
+	
+	# LINHA 11: 58					
+	sw $14,58648($8)
+	sw $11,58652($8)
+	sw $10,58656($8)
+	sw $14,58660($8)
+	sw $14,58664($8)
+	sw $14,58668($8)
+	sw $14,58672($8)
+	sw $14,58676($8)
+	sw $14,58680($8)
+	sw $14,58684($8)
+	sw $14,58688($8)
+	sw $9,58692($8)
+	sw $14,58696($8)
+	sw $14,58700($8)
+	sw $11,58704($8)
+	sw $14,58708($8)
+	
+	
+	# LINHA 12: 59
+	sw $14,59672($8)						
+	sw $11,59676($8)
+	sw $10,59680($8)
+	sw $14,59684($8)
+	sw $14,59688($8)
+	sw $14,59692($8)
+	sw $14,59696($8)
+	sw $14,59700($8)
+	sw $14,59704($8)
+	sw $14,59708($8)
+	sw $9,59712($8)
+	sw $9,59716($8)
+	sw $9,59720($8)
+	sw $10,59724($8)
+	sw $11,59728($8)
+	sw $14,59732($8)
+	
+	# LINHA 13: 60	
+	sw $14,60700($8)				
+	sw $11,60704($8)
+	sw $9,60708($8)
+	sw $14,60712($8)
+	sw $18,60716($8)
+	sw $18,60720($8)
+	sw $18,60724($8)
+	sw $14,60728($8)
+	sw $9,60732($8)
+	sw $9,60736($8)
+	sw $10,60740($8)
+	sw $11,60744($8)
+	sw $11,60748($8)
+	sw $14,60752($8)
+	
+	# LINHA 14: 61
+	sw $14,61724($8)
+	sw $11,61728($8)
+	sw $11,61732($8)
+	sw $18,61736($8)
+	sw $18,61740($8)
+	sw $18,61744($8)
+	sw $18,61748($8)
+	sw $10,61752($8)
+	sw $10,61756($8)
+	sw $10,61760($8)
+	sw $11,61764($8)
+	sw $11,61768($8)
+	sw $14,61772($8)
+	
+	# LINHA 15: 62
+	sw $14,62752($8)
+	sw $14,62756($8)
+	sw $18,62760($8)
+	sw $18,62764($8)
+	sw $18,62768($8)
+	sw $11,62772($8)
+	sw $11,62776($8)
+	sw $11,62780($8)
+	sw $11,62784($8)
+	sw $14,62788($8)
+	sw $14,62792($8)
+	
+	# LINHA 16: 63
+	sw $14,63784($8)
+	sw $18,63788($8)
+	sw $18,63792($8)
+	sw $18,63796($8)
+	sw $14,63800($8)
+	sw $14,63804($8)
+	sw $14,63808($8)
+	jr $31
+	
+loopNpcSubi:
+	beq $15, $0, resetLoop
+	add $24, $0, $31
+	j loopNpcPos
+	
+resetLoop:
+	addi $15, $0, 40
+	jr $31 #volta para o rï¿½tulo de verificacao (j infinito) ou rï¿½tulo do mario 
+
+loopNpcPos:
+	jal desenharFantasmaVerificacao
 	
 	addi $15, $15, -1
-	beq $15, $0, fimLoopPeixePos
+	beq $15, $0, fimLoopNpcPos
 	jal timerRotinas
 	jal verificarColisao
-	jal apagarPeixePos
+	jal apagarNpcPos
 	addi $8, $8, 1024
 	#j infinito
 	add $31, $0, $24
 	jr $31
 	
-apagarPeixePos:
-lw $19, 179508($8)
-sw $19, 48436($8)
+apagarNpcPos:
+lw $29, 184600($8) # Soma o número a 131072
+sw $29, 53528($8)
 
-lw $19, 179512($8)
-sw $19, 48440($8)
+lw $29, 182556($8) # Soma o número a 131072
+sw $29, 51484($8)
 
-lw $19, 179516($8)
-sw $19, 48444($8)
+lw $29, 181536($8) # Soma o número a 131072
+sw $29, 50464($8)
 
-lw $19, 179520($8)
-sw $19, 48448($8)
+lw $29, 181540($8) # Soma o número a 131072
+sw $29, 50468($8)
 
-lw $19, 179524($8)
-sw $19, 48452($8)
+lw $29, 180520($8) # Soma o número a 131072
+sw $29, 49448($8)
 
-lw $19, 182568($8)
-sw $19, 51496($8)
+lw $29, 180524($8) # Soma o número a 131072
+sw $29, 49452($8)
 
-lw $19, 181548($8)
-sw $19, 50476($8)
+lw $29, 179504($8) # Soma o número a 131072
+sw $29, 48432($8)
 
-lw $19, 181552($8)
-sw $19, 50480($8)
+lw $29, 179508($8) # Soma o número a 131072
+sw $29, 48436($8)
 
-lw $19, 180552($8)
-sw $19, 49480($8)
+lw $29, 179512($8) # Soma o número a 131072
+sw $29, 48440($8)
 
-lw $19, 181580($8)
-sw $19, 50508($8)
+lw $29, 179516($8) # Soma o número a 131072
+sw $29, 48444($8)
 
-lw $19, 182608($8)
-sw $19, 51536($8)
+lw $29, 179520($8) # Soma o número a 131072
+sw $29, 48448($8)
 
-lw $19, 183636($8)
-sw $19, 52564($8)
+lw $29, 180548($8) # Soma o número a 131072
+sw $29, 49476($8)
+
+lw $29, 180552($8) # Soma o número a 131072
+sw $29, 49480($8)
+
+lw $29, 181580($8) # Soma o número a 131072
+sw $29, 50508($8)
+
+lw $29, 181584($8) # Soma o número a 131072
+sw $29, 50512($8)
+
+lw $29, 182612($8) # Soma o número a 131072
+sw $29, 51540($8)
 	jr $31
 
 verificarColisao:
 addi $23, $0, 0
 ori $23, 0x5c9df2
 
-# Original: 57640 -> Novo Offset: 58664
-lw $19, 58664($8)
-bne $19, $23, gameOver
+# Original: 59672 -> Novo Offset: 60696
+lw $29, 60696($8)
+bne $29, $23, gameOver
 
-# Original: 58668 -> Novo Offset: 59692
-lw $19, 59692($8)
-bne $19, $23, gameOver
+# Original: 61724 -> Novo Offset: 62748
+lw $29, 62748($8)
+bne $29, $23, gameOver
 
-# Original: 59696 -> Novo Offset: 60720
-lw $19, 60720($8)
-bne $19, $23, gameOver
+# Original: 62752 -> Novo Offset: 63776
+lw $29, 63776($8)
+bne $29, $23, gameOver
 
-# Original: 59700 -> Novo Offset: 60724
-lw $19, 60724($8)
-bne $19, $23, gameOver
+# Original: 62756 -> Novo Offset: 63780
+lw $29, 63780($8)
+bne $29, $23, gameOver
 
-# Original: 59704 -> Novo Offset: 60728
-lw $19, 60728($8)
-bne $19, $23, gameOver
+# Original: 63784 -> Novo Offset: 64808
+lw $29, 64808($8)
+bne $29, $23, gameOver
 
-# Original: 59708 -> Novo Offset: 60732
-lw $19, 60732($8)
-bne $19, $23, gameOver
+# Original: 63788 -> Novo Offset: 64812
+lw $29, 64812($8)
+bne $29, $23, gameOver
 
-# Original: 58688 -> Novo Offset: 59712
-lw $19, 59712($8)
-bne $19, $23, gameOver
+# Original: 63792 -> Novo Offset: 64816
+lw $29, 64816($8)
+bne $29, $23, gameOver
 
-# Original: 58692 -> Novo Offset: 59716
-lw $19, 59716($8)
-bne $19, $23, gameOver
+# Original: 63796 -> Novo Offset: 64820
+lw $29, 64820($8)
+bne $29, $23, gameOver
 
-# Original: 58696 -> Novo Offset: 59720
-lw $19, 59720($8)
-bne $19, $23, gameOver
+# Original: 63800 -> Novo Offset: 64824
+lw $29, 64824($8)
+bne $29, $23, gameOver
 
-# Original: 58700 -> Novo Offset: 59724
-lw $19, 59724($8)
-bne $19, $23, gameOver
+# Original: 63804 -> Novo Offset: 64828
+lw $29, 64828($8)
+bne $29, $23, gameOver
 
-# Original: 58704 -> Novo Offset: 59728
-lw $19, 59728($8)
-bne $19, $23, gameOver
+# Original: 63808 -> Novo Offset: 64832
+lw $29, 64832($8)
+bne $29, $23, gameOver
 
-# Original: 57684 -> Novo Offset: 58708
-lw $19, 58708($8)
-bne $19, $23, gameOver
+# Original: 62788 -> Novo Offset: 63812
+lw $29, 63812($8)
+bne $29, $23, gameOver
+
+# Original: 62792 -> Novo Offset: 63816
+lw $29, 63816($8)
+bne $29, $23, gameOver
+
+# Original: 61772 -> Novo Offset: 62796
+lw $29, 62796($8)
+bne $29, $23, gameOver
+
+# Original: 60752 -> Novo Offset: 61776
+lw $29, 61776($8)
+bne $29, $23, gameOver
+
+# Original: 59732 -> Novo Offset: 60756
+lw $29, 60756($8)
+bne $29, $23, gameOver
+
 
 addi $23, $0, 0
 
 	jr $31
 	
-fimLoopPeixePos:
+fimLoopNpcPos:
 	addi $22, $0, 1
 	#j infinito
 	add $31, $0, $24
 	jr $31
 
-loopPeixeDesc:
+loopNpcDesc:
 	beq $15, $0, resetLoop
 	add $24, $0, $31
-	j loopPeixeNeg
+	j loopNpcNeg
 	
-loopPeixeNeg:
-	# LINHA 1: 59
-	sw $9,59696($8)
-	sw $9,59700($8)
-	sw $9,59704($8)
-	sw $9,59708($8)
-	
-	# LINHA 2: 58
-	sw $9,58668($8)
-	sw $9,58672($8)
-	sw $9,58676($8)
-	sw $9,58680($8)
-	sw $9,58684($8)
-	sw $9,58688($8)
-	sw $10,58692($8)
-	#sw $9,58696($8)
-	sw $11,58700($8)
-	sw $11,58704($8)
-
-	#LINHA 3: 57
-	sw $11,57640($8)
-	sw $11,57644($8)
-	sw $11,57648($8)
-	sw $9,57652($8)
-	sw $9,57656($8)
-	sw $9,57660($8)
-	sw $10,57664($8)
-	sw $10,57668($8)
-	sw $10,57672($8)
-	sw $11,57676($8)
-	sw $11,57680($8)
-	sw $11,57684($8)					
-	
-	# LINHA 4: 56
-	sw $10,56620($8)
-	sw $11,56624($8)
-	sw $9,56628($8)
-	sw $9,56632($8)
-	sw $10,56636($8)
-	sw $10,56640($8)
-	sw $10,56644($8)
-	sw $10,56648($8)
-	sw $10,56652($8)
-	sw $11,56656($8)
-	sw $11,56660($8)
-			
-	
-	# LINHA 5: 55
-	sw $10,55596($8)
-	sw $11,55600($8)
-	sw $10,55604($8)
-	sw $10,55608($8)
-	sw $10,55612($8)
-	sw $10,55616($8)
-	sw $10,55620($8)
-	sw $10,55624($8)
-	sw $10,55628($8)
-	#sw $9,55632($8)
-	sw $11,55636($8)			
-	
-	# LINHA 6: 54
-	sw $11,54568($8)
-	sw $11,54572($8)
-	sw $10,54576($8)
-	sw $10,54580($8)
-	sw $10,54584($8)
-	sw $10,54588($8)
-	sw $9,54592($8)
-	sw $9,54596($8)
-	sw $9,54600($8)
-	sw $9,54604($8)
-	sw $9,54608($8)
-
-	# LINHA 7: 53
-	sw $9,53544($8)
-	sw $9,53548($8)
-	sw $9,53552($8)
-	sw $9,53556($8)
-	sw $10,53560($8)
-	sw $10,53564($8)
-	sw $10,53568($8)
-	sw $9,53572($8)
-	sw $9,53576($8)
-	sw $9,53580($8)
-	sw $9,53584($8)
-	sw $9,53588($8)	
-	
-	# LINHA 8: 52
-	sw $10,52520($8)
-	sw $9,52524($8)
-	sw $10,52528($8)
-	sw $9,52532($8)
-	sw $10,52536($8)
-	sw $10,52540($8)
-	sw $10,52544($8)
-	sw $10,52548($8)
-	sw $9,52552($8)
-	sw $9,52556($8)
-	sw $9,52560($8)
-	sw $9,52564($8)
-	
-	# LINHA 9 : 51
-	sw $9,51496($8)
-	sw $10,51500($8)
-	sw $9,51504($8)
-	sw $9,51508($8)
-	sw $10,51512($8)
-	sw $10,51516($8)
-	sw $10,51520($8)
-	sw $10,51524($8)
-	sw $10,51528($8)
-	sw $9,51532($8)
-	sw $9,51536($8)		
-	
-	# LINHA 10: 50
-	sw $10,50476($8)
-	sw $10,50480($8)
-	sw $10,50484($8)
-	sw $10,50488($8)
-	sw $10,50492($8)
-	sw $10,50496($8)
-	sw $10,50500($8)
-	sw $10,50504($8)
-	sw $11,50508($8)	
-	
-	# LINHA 11: 50
-	sw $11,49464($8)
-	sw $11,49468($8)
-	sw $11,49472($8)
-	sw $11,49476($8)
-	sw $11,49480($8)
-	
-	# LINHA 12: 49
-	sw $11,48436($8)
-	sw $11,48440($8)
-	sw $11,48444($8)
-	sw $11,48448($8)
-	sw $11,48452($8)
+loopNpcNeg:
+	jal desenharFantasmaVerificacao
 	
 	addi $15, $15, -1
-	beq $15, $0, fimLoopPeixeNeg
+	beq $15, $0, fimLoopNpcNeg
 	jal timerRotinas
 	jal verificarColisao
-	jal apagarPeixeNeg
+	jal apagarNpcNeg
 	addi $8, $8, -1024
 	#j infinito
 	add $31, $0, $24
 	jr $31
 
-apagarPeixeNeg:
-	lw $19, 188712($8)
-sw $19, 57640($8)
+apagarNpcNeg:
+lw $29, 190744($8) # Soma o número a 131072
+sw $29, 59672($8)
 
-lw $19, 189740($8)
-sw $19, 58668($8)
+lw $29, 192796($8) # Soma o número a 131072
+sw $29, 61724($8)
 
-lw $19, 190768($8)
-sw $19, 59696($8)
+lw $29, 193824($8) # Soma o número a 131072
+sw $29, 62752($8)
 
-lw $19, 190772($8)
-sw $19, 59700($8)
+lw $29, 193828($8) # Soma o número a 131072
+sw $29, 62756($8)
 
-lw $19, 190776($8)
-sw $19, 59704($8)
+lw $29, 194856($8) # Soma o número a 131072
+sw $29, 63784($8)
 
-lw $19, 190780($8)
-sw $19, 59708($8)
+lw $29, 194860($8) # Soma o número a 131072
+sw $29, 63788($8)
 
-lw $19, 189760($8)
-sw $19, 58688($8)
+lw $29, 194864($8) # Soma o número a 131072
+sw $29, 63792($8)
 
-lw $19, 189764($8)
-sw $19, 58692($8)
+lw $29, 194868($8) # Soma o número a 131072
+sw $29, 63796($8)
 
-lw $19, 189768($8)
-sw $19, 58696($8)
+lw $29, 194872($8) # Soma o número a 131072
+sw $29, 63800($8)
 
-lw $19, 189772($8)
-sw $19, 58700($8)
+lw $29, 194876($8) # Soma o número a 131072
+sw $29, 63804($8)
 
-lw $19, 189776($8)
-sw $19, 58704($8)
+lw $29, 194880($8) # Soma o número a 131072
+sw $29, 63808($8)
 
-lw $19, 188756($8)
-sw $19, 57684($8)
+lw $29, 193860($8) # Soma o número a 131072
+sw $29, 62788($8)
+
+lw $29, 193864($8) # Soma o número a 131072
+sw $29, 62792($8)
+
+lw $29, 192844($8) # Soma o número a 131072
+sw $29, 61772($8)
+
+lw $29, 191824($8) # Soma o número a 131072
+sw $29, 60752($8)
+
+lw $29, 190804($8) # Soma o número a 131072
+sw $29, 59732($8)
+
 	jr $31
 	
-fimLoopPeixeNeg:
+fimLoopNpcNeg:
 	addi $22, $0, 0
 	#j infinito
 	add $31, $0, $24
