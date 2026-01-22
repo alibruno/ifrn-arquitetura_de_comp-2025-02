@@ -3537,48 +3537,140 @@ sw $9,102248($8)
 
 addi $9,$9,0
 
-# DO 
-	addi $4,$0,60
-	addi $5,$0,850
+# ============== MUSICA INICIAL =========================
+
+# Super Mario - Overworld theme
+			# INSTRUMENTO : PIANO
+			# NOTAS: 
+			# DO, SOL , MI
+			# LA, SI, SIB, LA
+			# SOL, MI, SOL, LA
+			# FA, SOL
+			# MI, DO, RE, SI
+
+# ============== INTRODUÃ‡ÃƒO =============================
+	# MI
+	addi $4,$0,64
+	addi $5,$0,300
 	addi $6,$0,0		
 	addi $7,$0,100
 	addi $2,$0,31
 	syscall
 	
 	# PAUSA
-	addi $4,$0,500
+	addi $4,$0,250
 	addi $2,$0,32
 	syscall
-
-	# DO 
-	addi $4,$0,60
-	addi $5,$0,850
+	
+	# MI
+	addi $4,$0,64
+	addi $5,$0,300
 	addi $6,$0,0		
 	addi $7,$0,100
 	addi $2,$0,31
 	syscall
 	
 	# PAUSA
-	addi $4,$0,500
+	addi $4,$0,250
+	addi $2,$0,32
+	syscall
+	
+	# MI
+	addi $4,$0,64
+	addi $5,$0,400
+	addi $6,$0,0		
+	addi $7,$0,100
+	addi $2,$0,31
+	syscall
+	
+	# PAUSA NO MEIO
+	addi $4,$0,300
+	addi $2,$0,32
+	syscall
+	
+	# DO
+	addi $4,$0,60
+	addi $5,$0,380
+	addi $6,$0,0		
+	addi $7,$0,100
+	addi $2,$0,31
+	syscall
+	
+	# PAUSA
+	addi $4,$0,250
+	addi $2,$0,32
+	syscall
+	
+	# MI
+	addi $4,$0,64
+	addi $5,$5,380
+	addi $6,$0,0		
+	addi $7,$0,100
+	addi $2,$0,31
+	syscall
+	
+	# PAUSA
+	addi $4,$0,250
 	addi $2,$0,32
 	syscall
 	
 	# SOL
 	addi $4,$0,67
-	addi $5,$0,850
+	addi $5,$0,580
+	addi $6,$0,0		
+	addi $7,$0,100
+	addi $2,$0,31
+	syscall
+	
+	# PAUSA FINAL
+	addi $4,$0,650
+	addi $2,$0,32
+	syscall
+	
+	# SOL GRAVE
+	addi $4,$0,55
+	addi $5,$0,580
+	addi $6,$0,0		
+	addi $7,$0,100
+	addi $2,$0,31
+	syscall
+	
+	# PAUSA FINAL
+	addi $4,$0,600
+	addi $2,$0,32
+	syscall
+	
+# ============ FIM INTRODUÃ‡ÃƒO =======================
+	
+	# DO 
+	addi $4,$0,60
+	addi $5,$0,1100
+	addi $6,$0,0		
+	addi $7,$0,115
+	addi $2,$0,31
+	syscall
+	
+	# PAUSA
+	addi $4,$0,550
+	addi $2,$0,32
+	syscall
+	
+	# SOL
+	addi $4,$0,67
+	addi $5,$0,1100
 	addi $6,$0,0		
 	addi $7,$0,100
 	addi $2,$0,31
 	syscall
 	
 	# PAUSA
-	addi $4,$0,500
+	addi $4,$0,550
 	addi $2,$0,32
 	syscall
 	
 	# MI 
 	addi $4,$0,64
-	addi $5,$0,850
+	addi $5,$0,1100
 	addi $6,$0,0		
 	addi $7,$0,100
 	addi $2,$0,31
@@ -3587,7 +3679,7 @@ addi $9,$9,0
 # =================================================
 			
 	# PAUSA
-	addi $4,$0,400
+	addi $4,$0,330
 	addi $2,$0,32
 	syscall
 
@@ -3603,7 +3695,7 @@ addi $9,$9,0
 	syscall
 	
 	# PAUSA
-	addi $4,$0,370
+	addi $4,$0,350
 	addi $2,$0,32
 	syscall
 	
@@ -3616,13 +3708,13 @@ addi $9,$9,0
 	syscall
 	
 	# PAUSA
-	addi $4,$0,450
+	addi $4,$0,350
 	addi $2,$0,32
 	syscall
 	
 	# SIB 
 	addi $4,$0,67
-	addi $5,$0,450
+	addi $5,$0,350
 	addi $6,$0,0		
 	addi $7,$0,100
 	addi $2,$0,31
@@ -3635,7 +3727,7 @@ addi $9,$9,0
 	
 	# LA
 	addi $4,$0,69
-	addi $5,$0,450
+	addi $5,$0,350
 	addi $6,$0,0		
 	addi $7,$0,100
 	addi $2,$0,31
@@ -3644,53 +3736,54 @@ addi $9,$9,0
 # ================================================
 	
 	# PAUSA
-	addi $4,$0,400
-	addi $2,$0,32
-	syscall
-	
-# ================ PARTE 3 =======================
-	# SOL
-	addi $4,$0,67
-	addi $5,$0,500
-	addi $6,$0,0		
-	addi $7,$0,100
-	addi $2,$0,31
-	syscall
-	
-	# PAUSA
 	addi $4,$0,350
 	addi $2,$0,32
 	syscall
 	
-	# MI
-	addi $4,$0,65
-	addi $5,$0,400
+# ================ PARTE 3 =======================
+	
+	# SOL
+	addi $4,$0,55
+	addi $5,$0,360
 	addi $6,$0,0		
 	addi $7,$0,100
 	addi $2,$0,31
 	syscall
 	
 	# PAUSA
-	addi $4,$0,300
+	addi $4,$0,260
+	addi $2,$0,32
+	syscall
+	
+	# MI
+	addi $4,$0,64
+	addi $5,$0,360
+	addi $6,$0,0		
+	addi $7,$0,100
+	addi $2,$0,31
+	syscall
+	
+	# PAUSA
+	addi $4,$0,260
 	addi $2,$0,32
 	syscall
 	
 	# SOL
 	addi $4,$0,67
-	addi $5,$0,400
+	addi $5,$0,360
 	addi $6,$0,0		
 	addi $7,$0,100
 	addi $2,$0,31
 	syscall
 	
 	# PAUSA
-	addi $4,$0,300
+	addi $4,$0,260
 	addi $2,$0,32
 	syscall
 	
 	# LA 
 	addi $4,$0,69
-	addi $5,$0,400
+	addi $5,$0,360
 	addi $6,$0,0		
 	addi $7,$0,100
 	addi $2,$0,31
@@ -3699,56 +3792,56 @@ addi $9,$9,0
 # =======================================
 	
 	# PAUSA
-	addi $4,$0,250
+	addi $4,$0,260
 	addi $2,$0,32
 	syscall
 	
 	# FA
 	addi $4,$0,65
-	addi $5,$0,300
+	addi $5,$0,260
 	addi $6,$0,0		
 	addi $7,$0,100
 	addi $2,$0,31
 	syscall
+	
+	# PAUSA
+	addi $4,$0,210
+	addi $2,$0,32
+	syscall
+	
+	# SOL 
+	addi $4,$0,67
+	addi $5,$0,260
+	addi $6,$0,0		
+	addi $7,$0,100
+	addi $2,$0,31
+	syscall
+
+# =========================================
 	
 	# PAUSA
 	addi $4,$0,250
 	addi $2,$0,32
 	syscall
 	
-	# SOL 
-	addi $4,$0,67
-	addi $5,$0,300
-	addi $6,$0,0		
-	addi $7,$0,100
-	addi $2,$0,31
-	syscall
-
-#===========================================
-
-	# PAUSA
-	addi $4,$0,400
-	addi $2,$0,32
-	syscall
-	
-# ========== PARTE 4 =======================
+# =============== PARTE 4 =================
 
 	# MI
 	addi $4,$0,64
-	addi $5,$0,400
+	addi $5,$0,350
 	addi $6,$0,0		
 	addi $7,$0,100
 	addi $2,$0,31
 	syscall
 	
 	# PAUSA
-	addi $4,$0,350
+	addi $4,$0,300
 	addi $2,$0,32
 	syscall
 	
 	# DO
 	addi $4,$0,60
-	addi $5,$0,300
+	addi $5,$0,250
 	addi $6,$0,0		
 	addi $7,$0,100
 	addi $2,$0,31
@@ -3779,6 +3872,9 @@ addi $9,$9,0
 	addi $7,$0,100
 	addi $2,$0,31
 	syscall
+	
+	
+# =============== FIM DA MUSICA INICIAL =====================
 
 temporizador: addi $9,$0,700000
 timer: beq $9,$0,icenario
@@ -8727,52 +8823,52 @@ loopNpcPos:
 	jr $31
 	
 apagarNpcPos:
-lw $29, 184600($8) # Soma o número a 131072
+lw $29, 184600($8) # Soma o nï¿½mero a 131072
 sw $29, 53528($8)
 
-lw $29, 182556($8) # Soma o número a 131072
+lw $29, 182556($8) # Soma o nï¿½mero a 131072
 sw $29, 51484($8)
 
-lw $29, 181536($8) # Soma o número a 131072
+lw $29, 181536($8) # Soma o nï¿½mero a 131072
 sw $29, 50464($8)
 
-lw $29, 181540($8) # Soma o número a 131072
+lw $29, 181540($8) # Soma o nï¿½mero a 131072
 sw $29, 50468($8)
 
-lw $29, 180520($8) # Soma o número a 131072
+lw $29, 180520($8) # Soma o nï¿½mero a 131072
 sw $29, 49448($8)
 
-lw $29, 180524($8) # Soma o número a 131072
+lw $29, 180524($8) # Soma o nï¿½mero a 131072
 sw $29, 49452($8)
 
-lw $29, 179504($8) # Soma o número a 131072
+lw $29, 179504($8) # Soma o nï¿½mero a 131072
 sw $29, 48432($8)
 
-lw $29, 179508($8) # Soma o número a 131072
+lw $29, 179508($8) # Soma o nï¿½mero a 131072
 sw $29, 48436($8)
 
-lw $29, 179512($8) # Soma o número a 131072
+lw $29, 179512($8) # Soma o nï¿½mero a 131072
 sw $29, 48440($8)
 
-lw $29, 179516($8) # Soma o número a 131072
+lw $29, 179516($8) # Soma o nï¿½mero a 131072
 sw $29, 48444($8)
 
-lw $29, 179520($8) # Soma o número a 131072
+lw $29, 179520($8) # Soma o nï¿½mero a 131072
 sw $29, 48448($8)
 
-lw $29, 180548($8) # Soma o número a 131072
+lw $29, 180548($8) # Soma o nï¿½mero a 131072
 sw $29, 49476($8)
 
-lw $29, 180552($8) # Soma o número a 131072
+lw $29, 180552($8) # Soma o nï¿½mero a 131072
 sw $29, 49480($8)
 
-lw $29, 181580($8) # Soma o número a 131072
+lw $29, 181580($8) # Soma o nï¿½mero a 131072
 sw $29, 50508($8)
 
-lw $29, 181584($8) # Soma o número a 131072
+lw $29, 181584($8) # Soma o nï¿½mero a 131072
 sw $29, 50512($8)
 
-lw $29, 182612($8) # Soma o número a 131072
+lw $29, 182612($8) # Soma o nï¿½mero a 131072
 sw $29, 51540($8)
 	jr $31
 
@@ -8874,52 +8970,52 @@ loopNpcNeg:
 	jr $31
 
 apagarNpcNeg:
-lw $29, 190744($8) # Soma o número a 131072
+lw $29, 190744($8) # Soma o nï¿½mero a 131072
 sw $29, 59672($8)
 
-lw $29, 192796($8) # Soma o número a 131072
+lw $29, 192796($8) # Soma o nï¿½mero a 131072
 sw $29, 61724($8)
 
-lw $29, 193824($8) # Soma o número a 131072
+lw $29, 193824($8) # Soma o nï¿½mero a 131072
 sw $29, 62752($8)
 
-lw $29, 193828($8) # Soma o número a 131072
+lw $29, 193828($8) # Soma o nï¿½mero a 131072
 sw $29, 62756($8)
 
-lw $29, 194856($8) # Soma o número a 131072
+lw $29, 194856($8) # Soma o nï¿½mero a 131072
 sw $29, 63784($8)
 
-lw $29, 194860($8) # Soma o número a 131072
+lw $29, 194860($8) # Soma o nï¿½mero a 131072
 sw $29, 63788($8)
 
-lw $29, 194864($8) # Soma o número a 131072
+lw $29, 194864($8) # Soma o nï¿½mero a 131072
 sw $29, 63792($8)
 
-lw $29, 194868($8) # Soma o número a 131072
+lw $29, 194868($8) # Soma o nï¿½mero a 131072
 sw $29, 63796($8)
 
-lw $29, 194872($8) # Soma o número a 131072
+lw $29, 194872($8) # Soma o nï¿½mero a 131072
 sw $29, 63800($8)
 
-lw $29, 194876($8) # Soma o número a 131072
+lw $29, 194876($8) # Soma o nï¿½mero a 131072
 sw $29, 63804($8)
 
-lw $29, 194880($8) # Soma o número a 131072
+lw $29, 194880($8) # Soma o nï¿½mero a 131072
 sw $29, 63808($8)
 
-lw $29, 193860($8) # Soma o número a 131072
+lw $29, 193860($8) # Soma o nï¿½mero a 131072
 sw $29, 62788($8)
 
-lw $29, 193864($8) # Soma o número a 131072
+lw $29, 193864($8) # Soma o nï¿½mero a 131072
 sw $29, 62792($8)
 
-lw $29, 192844($8) # Soma o número a 131072
+lw $29, 192844($8) # Soma o nï¿½mero a 131072
 sw $29, 61772($8)
 
-lw $29, 191824($8) # Soma o número a 131072
+lw $29, 191824($8) # Soma o nï¿½mero a 131072
 sw $29, 60752($8)
 
-lw $29, 190804($8) # Soma o número a 131072
+lw $29, 190804($8) # Soma o nï¿½mero a 131072
 sw $29, 59732($8)
 
 	jr $31
