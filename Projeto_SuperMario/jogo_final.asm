@@ -3,7 +3,7 @@
 main:	lui $8,0x1001
 	ori $9,0xffffff
 	
-	addi $8,$8,-128  # Centralizar o texto
+	addi $8,$8,-128  # Centralizar o texto 
 	
 # ====== PALAVRA SUPER ========
 	
